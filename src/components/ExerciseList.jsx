@@ -18,13 +18,13 @@ function groupByCategory(list) {
 const DEFAULT_ORDER = ['Aktivasyon', 'Mobilite', 'Esneme', 'Güç', 'Denge', 'Kardiyo', 'Diğer']
 
 const heroByCategory = {
-  Aktivasyon: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=1200&q=80',
-  Mobilite: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=80',
-  Esneme: 'https://images.unsplash.com/photo-1554306274-f23873d9a26c?auto=format&fit=crop&w=1200&q=80',
-  Güç: 'https://images.unsplash.com/photo-1579758629938-03607ccdbaba?auto=format&fit=crop&w=1200&q=80',
-  Denge: 'https://images.unsplash.com/photo-1546484959-f9a9d68f2c1c?auto=format&fit=crop&w=1200&q=80',
-  Kardiyo: 'https://images.unsplash.com/photo-1526401485004-2aa7c769f0b7?auto=format&fit=crop&w=1200&q=80',
-  Diğer: 'https://images.unsplash.com/photo-1556817411-31ae72fa3ea0?auto=format&fit=crop&w=1200&q=80'
+  Aktivasyon: 'https://placehold.co/900x320?text=Aktivasyon',
+  Mobilite: 'https://placehold.co/900x320?text=Mobilite',
+  Esneme: 'https://placehold.co/900x320?text=Esneme',
+  Güç: 'https://placehold.co/900x320?text=G%C3%BC%C3%A7',
+  Denge: 'https://placehold.co/900x320?text=Denge',
+  Kardiyo: 'https://placehold.co/900x320?text=Kardiyo',
+  Diğer: 'https://placehold.co/900x320?text=Egzersiz'
 }
 
 export default function ExerciseList({ exercises, onSelect, onBack, selectedCategory = null }) {
@@ -71,7 +71,7 @@ export default function ExerciseList({ exercises, onSelect, onBack, selectedCate
           <img
             loading="lazy"
             decoding="async"
-            src="https://images.unsplash.com/photo-1518611012118-5bc8c7c4dc1c?auto=format&fit=crop&w=1200&q=80"
+            src="https://placehold.co/900x360?text=Egzersiz+Plan%C4%B1"
             alt="Egzersiz rehberi"
             className="w-full h-full object-cover"
           />
