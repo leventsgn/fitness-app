@@ -8,13 +8,17 @@ export default function ExercisePlayer({ exercise, onBack }) {
   const [isPlaying, setIsPlaying] = useState(false)
   const [musicOn, setMusicOn] = useState(false)
   const [started, setStarted] = useState(false)
+  const [elapsed, setElapsed] = useState(0)
+  const isGif = Boolean(exercise.video?.toLowerCase().includes('.gif'))
+  const canPlayVideo = !isGif
 
   function handleBack() {
     // pause media and call parent
-    videoRef.current?.pause()
+    if (canPlayVideo) videoRef.current?.pause()
     audioRef.current?.pause()
     setIsPlaying(false)
     setStarted(false)
+    setElapsed(0)
     if (onBack) onBack()
   }
 
@@ -23,10 +27,28 @@ export default function ExercisePlayer({ exercise, onBack }) {
     if (audioRef.current) audioRef.current.volume = 0.25
   }, [])
 
+  useEffect(() => {
+    if (!started || !isPlaying) return
+
+    const timer = setInterval(() => {
+      setElapsed((prev) => prev + 1)
+    }, 1000)
+
+    return () => clearInterval(timer)
+  }, [isPlaying, started])
+
+  useEffect(() => {
+    return () => {
+      videoRef.current?.pause()
+      audioRef.current?.pause()
+    }
+  }, [])
+
   function handleStart() {
     setStarted(true)
     setIsPlaying(true)
-    videoRef.current?.play()
+    setElapsed(0)
+    if (canPlayVideo) videoRef.current?.play()
     if (musicOn) audioRef.current?.play()
   }
 
@@ -43,9 +65,10 @@ export default function ExercisePlayer({ exercise, onBack }) {
         }
       }, 120)
     }
-    videoRef.current?.pause()
+    if (canPlayVideo) videoRef.current?.pause()
     setIsPlaying(false)
     setStarted(false)
+    setElapsed(0)
   }
 
   function toggleMusic() {
@@ -73,20 +96,30 @@ export default function ExercisePlayer({ exercise, onBack }) {
             </svg>
           </button>
 
-          <video
-            ref={videoRef}
-            src={exercise.video}
-            poster={exercise.thumbnailSmall || exercise.thumbnail}
-            preload="metadata"
-            loop
-            playsInline
-            className="w-full h-full object-cover"
-            muted={!musicOn}
-            aria-label={`Video for ${exercise.title}`}
-          />
+          {isGif ? (
+            <img
+              src={exercise.video}
+              alt={`${exercise.title} animasyonu`}
+              className="w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
+            />
+          ) : (
+            <video
+              ref={videoRef}
+              src={exercise.video}
+              poster={exercise.thumbnailSmall || exercise.thumbnail}
+              preload="metadata"
+              loop
+              playsInline
+              className="w-full h-full object-cover"
+              muted={!musicOn}
+              aria-label={`Video for ${exercise.title}`}
+            />
+          )}
         </div>
         <div className="p-5">
-          <InfoPanel exercise={exercise} started={started} />
+          <InfoPanel exercise={exercise} started={started} elapsed={elapsed} />
         </div>
       </div>
 
@@ -97,6 +130,8 @@ export default function ExercisePlayer({ exercise, onBack }) {
         onFinish={handleFinish}
         musicOn={musicOn}
         toggleMusic={toggleMusic}
+        elapsed={elapsed}
+        durationLabel={exercise.duration}
       />
 
       <audio ref={audioRef} src={exercise.audio} loop preload="none" />
