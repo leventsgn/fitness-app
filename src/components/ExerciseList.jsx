@@ -18,23 +18,27 @@ function groupByCategory(list) {
 const DEFAULT_ORDER = ['Aktivasyon', 'Mobilite', 'Esneme', 'Güç', 'Denge', 'Kardiyo', 'Diğer']
 
 const heroByCategory = {
-  Aktivasyon: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=1200&q=80',
-  Mobilite: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=80',
-  Esneme: 'https://images.unsplash.com/photo-1554306274-f23873d9a26c?auto=format&fit=crop&w=1200&q=80',
-  Güç: 'https://images.unsplash.com/photo-1579758629938-03607ccdbaba?auto=format&fit=crop&w=1200&q=80',
-  Denge: 'https://images.unsplash.com/photo-1546484959-f9a9d68f2c1c?auto=format&fit=crop&w=1200&q=80',
-  Kardiyo: 'https://images.unsplash.com/photo-1526401485004-2aa7c769f0b7?auto=format&fit=crop&w=1200&q=80',
-  Diğer: 'https://images.unsplash.com/photo-1556817411-31ae72fa3ea0?auto=format&fit=crop&w=1200&q=80'
+  Aktivasyon: 'https://placehold.co/900x320?text=Aktivasyon',
+  Mobilite: 'https://placehold.co/900x320?text=Mobilite',
+  Esneme: 'https://placehold.co/900x320?text=Esneme',
+  Güç: 'https://placehold.co/900x320?text=G%C3%BC%C3%A7',
+  Denge: 'https://placehold.co/900x320?text=Denge',
+  Kardiyo: 'https://placehold.co/900x320?text=Kardiyo',
+  Diğer: 'https://placehold.co/900x320?text=Egzersiz'
 }
 
-export default function ExerciseList({ exercises, onSelect }) {
+export default function ExerciseList({ exercises, onSelect, onBack, selectedCategory = null }) {
   const [query, setQuery] = useState('')
+  const baseList = useMemo(() => {
+    if (!selectedCategory) return exercises
+    return exercises.filter((e) => e.category === selectedCategory)
+  }, [exercises, selectedCategory])
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase()
-    if (!q) return exercises
-    return exercises.filter((e) => (e.title + ' ' + e.description).toLowerCase().includes(q))
-  }, [exercises, query])
+    if (!q) return baseList
+    return baseList.filter((e) => (e.title + ' ' + e.description).toLowerCase().includes(q))
+  }, [baseList, query])
 
   const grouped = useMemo(() => groupByCategory(filtered), [filtered])
   const categoryOrder = useMemo(() => {
@@ -50,50 +54,71 @@ export default function ExerciseList({ exercises, onSelect }) {
   return (
     <div className="min-h-screen p-4 max-w-md mx-auto space-y-5">
       <header className="space-y-3">
+        <div className="flex items-center justify-between">
+          <button
+            onClick={onBack}
+            className="rounded-full p-2 bg-white shadow-sm border border-gray-200 hover:bg-gray-50 focus:outline-none"
+            aria-label="Ana sayfaya dön"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M15 18l-6-6 6-6" stroke="#0f172a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+          <span className="text-xs font-semibold text-gray-500">Egzersizler</span>
+          <div className="w-9" aria-hidden="true" />
+        </div>
         <div className="rounded-xl overflow-hidden player-card relative h-40">
           <img
             loading="lazy"
             decoding="async"
-            src="https://images.unsplash.com/photo-1518611012118-5bc8c7c4dc1c?auto=format&fit=crop&w=1200&q=80"
+            src="https://placehold.co/900x360?text=Egzersiz+Plan%C4%B1"
             alt="Egzersiz rehberi"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
           <div className="absolute left-4 bottom-4 text-white space-y-1 drop-shadow">
             <p className="text-xs uppercase tracking-wide text-white/80">Günlük plan</p>
-            <h1 className="text-2xl font-semibold leading-tight">Egzersizlerim</h1>
-            <p className="text-sm text-white/80">Seç, başlat ve ilerlemeyi takip et.</p>
+            <h1 className="text-2xl font-semibold leading-tight">
+              {selectedCategory ? `${selectedCategory} egzersizleri` : 'Egzersizlerim'}
+            </h1>
+            <p className="text-sm text-white/80">
+              {selectedCategory ? 'Alt başlıklara dokunup başlatın.' : 'Seç, başlat ve ilerlemeyi takip et.'}
+            </p>
           </div>
         </div>
 
-        <div className="rounded-xl bg-white shadow-sm p-4 space-y-2 border border-gray-100">
-          <div className="flex items-center gap-2">
-            <div className="w-9 h-9 rounded-xl bg-primary text-white flex items-center justify-center font-semibold">i</div>
-            <div>
-              <p className="text-sm font-semibold text-gray-900">Kısa intro</p>
-              <p className="text-xs text-gray-500">3 adımda egzersiz akışını başlatın.</p>
+        {!selectedCategory && (
+          <div className="rounded-xl bg-white shadow-sm p-4 space-y-2 border border-gray-100">
+            <div className="flex items-center gap-2">
+              <div className="w-9 h-9 rounded-xl bg-primary text-white flex items-center justify-center font-semibold">i</div>
+              <div>
+                <p className="text-sm font-semibold text-gray-900">Kısa intro</p>
+                <p className="text-xs text-gray-500">3 adımda egzersiz akışını başlatın.</p>
+              </div>
             </div>
+            <ul className="text-sm text-gray-700 space-y-1 pl-1">
+              <li>• Kategoriden hareketi seçin ve detayları inceleyin.</li>
+              <li>• Başlat’a dokunarak süre ve ipuçlarını takip edin.</li>
+              <li>• Bitir ile seansı kaydedip sıradaki harekete geçin.</li>
+            </ul>
           </div>
-          <ul className="text-sm text-gray-700 space-y-1 pl-1">
-            <li>• Kategoriden hareketi seçin ve detayları inceleyin.</li>
-            <li>• Başlat’a dokunarak süre ve ipuçlarını takip edin.</li>
-            <li>• Bitir ile seansı kaydedip sıradaki harekete geçin.</li>
-          </ul>
-        </div>
+        )}
 
         <div className="space-y-2">
-          <div className="flex gap-2 overflow-x-auto pb-1" aria-label="Sayfa alt kırılımları">
-            {categoryOrder.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => scrollToCategory(cat)}
-                className="px-3 py-2 bg-gray-100 text-gray-700 rounded-full text-sm whitespace-nowrap hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/40"
-              >
-                {cat}
-                <span className="ml-1 text-gray-400">({grouped[cat]?.length || 0})</span>
-              </button>
-            ))}
-          </div>
+          {!selectedCategory && (
+            <div className="flex gap-2 overflow-x-auto pb-1" aria-label="Sayfa alt kırılımları">
+              {categoryOrder.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => scrollToCategory(cat)}
+                  className="px-3 py-2 bg-gray-100 text-gray-700 rounded-full text-sm whitespace-nowrap hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/40"
+                >
+                  {cat}
+                  <span className="ml-1 text-gray-400">({grouped[cat]?.length || 0})</span>
+                </button>
+              ))}
+            </div>
+          )}
 
           <input
             value={query}

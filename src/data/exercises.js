@@ -1,4 +1,50 @@
-export const exercises = [
+const mediaByCategory = {
+  Aktivasyon: {
+    video: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',
+    audio: 'https://cdn.pixabay.com/download/audio/2022/03/15/audio_6a9f9de3df.mp3?filename=calm-ambient-110397.mp3',
+    image: 'https://placehold.co/800x520?text=Aktivasyon',
+    imageSmall: 'https://placehold.co/200x140?text=Aktivasyon'
+  },
+  Mobilite: {
+    video: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',
+    audio: 'https://cdn.pixabay.com/download/audio/2022/03/15/audio_6a9f9de3df.mp3?filename=calm-ambient-110397.mp3',
+    image: 'https://placehold.co/800x520?text=Mobilite',
+    imageSmall: 'https://placehold.co/200x140?text=Mobilite'
+  },
+  Esneme: {
+    video: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',
+    audio: 'https://cdn.pixabay.com/download/audio/2022/03/15/audio_6a9f9de3df.mp3?filename=calm-ambient-110397.mp3',
+    image: 'https://placehold.co/800x520?text=Esneme',
+    imageSmall: 'https://placehold.co/200x140?text=Esneme'
+  },
+  Güç: {
+    video: 'https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4',
+    audio: 'https://cdn.pixabay.com/download/audio/2022/03/08/audio_49389c3d90.mp3?filename=smooth-chill-114203.mp3',
+    image: 'https://placehold.co/800x520?text=G%C3%BC%C3%A7',
+    imageSmall: 'https://placehold.co/200x140?text=G%C3%BC%C3%A7'
+  },
+  Denge: {
+    video: 'https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
+    audio: 'https://cdn.pixabay.com/download/audio/2022/03/08/audio_49389c3d90.mp3?filename=smooth-chill-114203.mp3',
+    image: 'https://placehold.co/800x520?text=Denge',
+    imageSmall: 'https://placehold.co/200x140?text=Denge'
+  },
+  Kardiyo: {
+    video: 'https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+    audio: 'https://cdn.pixabay.com/download/audio/2022/03/08/audio_49389c3d90.mp3?filename=smooth-chill-114203.mp3',
+    image: 'https://placehold.co/800x520?text=Kardiyo',
+    imageSmall: 'https://placehold.co/200x140?text=Kardiyo'
+  }
+}
+
+const fallbackMedia = {
+  video: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',
+  audio: 'https://cdn.pixabay.com/download/audio/2022/03/15/audio_6a9f9de3df.mp3?filename=calm-ambient-110397.mp3',
+  image: 'https://placehold.co/800x520?text=Egzersiz',
+  imageSmall: 'https://placehold.co/200x140?text=Egzersiz'
+}
+
+const rawExercises = [
   {
     id: 'ex-001',
     title: 'Kalça Kapatma (Glute Squeeze)',
@@ -6,10 +52,6 @@ export const exercises = [
     warnings: 'Sıkma sırasında belinizi çukurlaştırmayın; bel ağrısı veya kramp hissederseniz durup kısa molalar verin ve fizyoterapistinize danışın.',
     duration: '30s',
     reps: '10 tekrar',
-    video: 'https://videos.pexels.com/video-files/4148984/4148984-uhd_2560_1440_25fps.mp4',
-    audio: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
-    thumbnail: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=400&q=60',
-    thumbnailSmall: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=120&q=40',
     tags: ['Aktivasyon', 'Glute güçlendirme'],
     cues: ['Ayak tabanını yere sabitleyin', 'Sıkarken nefes verin, bırakırken alın', 'Bel boşluğunu kapatmadan devam edin'],
     category: 'Aktivasyon'
@@ -21,10 +63,6 @@ export const exercises = [
     warnings: 'Belinizde keskin ağrı veya uyuşma olursa hareketi bırakın; hareketi küçük aralıkta ve ağrısız bölgede yapın.',
     duration: '30s',
     reps: '10 tekrar',
-    video: 'https://videos.pexels.com/video-files/3757995/3757995-uhd_2560_1440_25fps.mp4',
-    audio: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3',
-    thumbnail: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=400&q=60',
-    thumbnailSmall: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=120&q=40',
     tags: ['Aktivasyon', 'Bel stabilizasyonu'],
     cues: ['Nefesi verirken belinizi yere bastırın', 'Kaburgaları kapanık tutun', 'Kalçayı aşırı kaldırmadan kontrolü koruyun'],
     category: 'Aktivasyon'
@@ -36,10 +74,6 @@ export const exercises = [
     warnings: 'Boynunuzu kasmayın; omuzda batma veya kola yayılan uyuşma olursa durun ve aralığı küçültün.',
     duration: '40s',
     reps: '8 tekrar',
-    video: 'https://videos.pexels.com/video-files/4061265/4061265-uhd_2560_1440_25fps.mp4',
-    audio: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3',
-    thumbnail: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&q=60',
-    thumbnailSmall: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=120&q=40',
     tags: ['Aktivasyon', 'Omuz stabilizasyonu'],
     cues: ['Kürekleri aşağı ve birbirine çekin', 'Boynu uzatıp çeneyi hafifçe içeri alın', 'Nefesi düzenli tutun'],
     category: 'Aktivasyon'
@@ -331,4 +365,16 @@ export const exercises = [
   }
 ]
 
+function applyMedia(item) {
+  const media = mediaByCategory[item.category] || fallbackMedia
+  return {
+    ...item,
+    video: media.video,
+    audio: media.audio,
+    thumbnail: media.image,
+    thumbnailSmall: media.imageSmall
+  }
+}
+
+export const exercises = rawExercises.map(applyMedia)
 export const demoExercise = exercises[0]
