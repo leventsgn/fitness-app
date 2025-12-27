@@ -27,14 +27,18 @@ const heroByCategory = {
   Diğer: 'https://images.unsplash.com/photo-1556817411-31ae72fa3ea0?auto=format&fit=crop&w=1200&q=80'
 }
 
-export default function ExerciseList({ exercises, onSelect }) {
+export default function ExerciseList({ exercises, onSelect, onBack, selectedCategory = null }) {
   const [query, setQuery] = useState('')
+  const baseList = useMemo(() => {
+    if (!selectedCategory) return exercises
+    return exercises.filter((e) => e.category === selectedCategory)
+  }, [exercises, selectedCategory])
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase()
-    if (!q) return exercises
-    return exercises.filter((e) => (e.title + ' ' + e.description).toLowerCase().includes(q))
-  }, [exercises, query])
+    if (!q) return baseList
+    return baseList.filter((e) => (e.title + ' ' + e.description).toLowerCase().includes(q))
+  }, [baseList, query])
 
   const grouped = useMemo(() => groupByCategory(filtered), [filtered])
   const categoryOrder = useMemo(() => {
@@ -50,6 +54,19 @@ export default function ExerciseList({ exercises, onSelect }) {
   return (
     <div className="min-h-screen p-4 max-w-md mx-auto space-y-5">
       <header className="space-y-3">
+        <div className="flex items-center justify-between">
+          <button
+            onClick={onBack}
+            className="rounded-full p-2 bg-white shadow-sm border border-gray-200 hover:bg-gray-50 focus:outline-none"
+            aria-label="Ana sayfaya dön"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M15 18l-6-6 6-6" stroke="#0f172a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+          <span className="text-xs font-semibold text-gray-500">Egzersizler</span>
+          <div className="w-9" aria-hidden="true" />
+        </div>
         <div className="rounded-xl overflow-hidden player-card relative h-40">
           <img
             loading="lazy"
@@ -61,39 +78,47 @@ export default function ExerciseList({ exercises, onSelect }) {
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
           <div className="absolute left-4 bottom-4 text-white space-y-1 drop-shadow">
             <p className="text-xs uppercase tracking-wide text-white/80">Günlük plan</p>
-            <h1 className="text-2xl font-semibold leading-tight">Egzersizlerim</h1>
-            <p className="text-sm text-white/80">Seç, başlat ve ilerlemeyi takip et.</p>
+            <h1 className="text-2xl font-semibold leading-tight">
+              {selectedCategory ? `${selectedCategory} egzersizleri` : 'Egzersizlerim'}
+            </h1>
+            <p className="text-sm text-white/80">
+              {selectedCategory ? 'Alt başlıklara dokunup başlatın.' : 'Seç, başlat ve ilerlemeyi takip et.'}
+            </p>
           </div>
         </div>
 
-        <div className="rounded-xl bg-white shadow-sm p-4 space-y-2 border border-gray-100">
-          <div className="flex items-center gap-2">
-            <div className="w-9 h-9 rounded-xl bg-primary text-white flex items-center justify-center font-semibold">i</div>
-            <div>
-              <p className="text-sm font-semibold text-gray-900">Kısa intro</p>
-              <p className="text-xs text-gray-500">3 adımda egzersiz akışını başlatın.</p>
+        {!selectedCategory && (
+          <div className="rounded-xl bg-white shadow-sm p-4 space-y-2 border border-gray-100">
+            <div className="flex items-center gap-2">
+              <div className="w-9 h-9 rounded-xl bg-primary text-white flex items-center justify-center font-semibold">i</div>
+              <div>
+                <p className="text-sm font-semibold text-gray-900">Kısa intro</p>
+                <p className="text-xs text-gray-500">3 adımda egzersiz akışını başlatın.</p>
+              </div>
             </div>
+            <ul className="text-sm text-gray-700 space-y-1 pl-1">
+              <li>• Kategoriden hareketi seçin ve detayları inceleyin.</li>
+              <li>• Başlat’a dokunarak süre ve ipuçlarını takip edin.</li>
+              <li>• Bitir ile seansı kaydedip sıradaki harekete geçin.</li>
+            </ul>
           </div>
-          <ul className="text-sm text-gray-700 space-y-1 pl-1">
-            <li>• Kategoriden hareketi seçin ve detayları inceleyin.</li>
-            <li>• Başlat’a dokunarak süre ve ipuçlarını takip edin.</li>
-            <li>• Bitir ile seansı kaydedip sıradaki harekete geçin.</li>
-          </ul>
-        </div>
+        )}
 
         <div className="space-y-2">
-          <div className="flex gap-2 overflow-x-auto pb-1" aria-label="Sayfa alt kırılımları">
-            {categoryOrder.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => scrollToCategory(cat)}
-                className="px-3 py-2 bg-gray-100 text-gray-700 rounded-full text-sm whitespace-nowrap hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/40"
-              >
-                {cat}
-                <span className="ml-1 text-gray-400">({grouped[cat]?.length || 0})</span>
-              </button>
-            ))}
-          </div>
+          {!selectedCategory && (
+            <div className="flex gap-2 overflow-x-auto pb-1" aria-label="Sayfa alt kırılımları">
+              {categoryOrder.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => scrollToCategory(cat)}
+                  className="px-3 py-2 bg-gray-100 text-gray-700 rounded-full text-sm whitespace-nowrap hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/40"
+                >
+                  {cat}
+                  <span className="ml-1 text-gray-400">({grouped[cat]?.length || 0})</span>
+                </button>
+              ))}
+            </div>
+          )}
 
           <input
             value={query}
