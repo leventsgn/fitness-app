@@ -31,7 +31,7 @@ export default function Profile({ user, exercises = [], requirementAnalysis = []
 
         <div className="rounded-2xl overflow-hidden relative h-36 player-card">
           <img
-            src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1200&q=80"
+            src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=1200&q=80"
             alt="Profil kapak görseli"
             className="w-full h-full object-cover"
             loading="lazy"
