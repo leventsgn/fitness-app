@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useCallback } from 'react'
 import ExerciseCard from './ExerciseCard'
+import { formatDate } from '../utils/formatters'
 
 function slugify(text) {
   return text.toLowerCase().replace(/[^a-z0-9ğüşıöç ]/gi, '').trim().replace(/\s+/g, '-')
@@ -25,7 +26,7 @@ const heroByCategory = {
   Diğer: 'https://images.unsplash.com/photo-1554344058-8d1d1bc354c5?auto=format&fit=crop&w=1200&q=80'
 }
 
-export default function ExerciseList({ exercises, onSelect }) {
+export default function ExerciseList({ exercises, onSelect, profile = {}, performance = {} }) {
   const [query, setQuery] = useState('')
 
   const filtered = useMemo(() => {
@@ -53,14 +54,14 @@ export default function ExerciseList({ exercises, onSelect }) {
             loading="lazy"
             decoding="async"
             src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1?auto=format&fit=crop&w=1200&q=80"
-            alt="Egzersiz rehberi"
+            alt="Rehabilitasyon rehberi"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
           <div className="absolute left-4 bottom-4 text-white space-y-1 drop-shadow">
-            <p className="text-xs uppercase tracking-wide text-white/80">Günlük plan</p>
-            <h1 className="text-2xl font-semibold leading-tight">Egzersizlerim</h1>
-            <p className="text-sm text-white/80">Seç, başlat ve ilerlemeyi takip et.</p>
+            <p className="text-xs uppercase tracking-wide text-white/80">{performance.phase || 'Rehabilitasyon'}</p>
+            <h1 className="text-2xl font-semibold leading-tight">{profile.program || 'Güncel program'}</h1>
+            <p className="text-sm text-white/80">{performance.todayFocus || 'Bugünkü odak çalışma'}</p>
           </div>
         </div>
 
@@ -68,15 +69,38 @@ export default function ExerciseList({ exercises, onSelect }) {
           <div className="flex items-center gap-2">
             <div className="w-9 h-9 rounded-xl bg-primary text-white flex items-center justify-center font-semibold">i</div>
             <div>
-              <p className="text-sm font-semibold text-gray-900">Kısa intro</p>
-              <p className="text-xs text-gray-500">3 adımda egzersiz akışını başlatın.</p>
+              <p className="text-sm font-semibold text-gray-900">Kısa akış</p>
+              <p className="text-xs text-gray-500">Sıralı faz ısınma → denge → güç.</p>
             </div>
           </div>
           <ul className="text-sm text-gray-700 space-y-1 pl-1">
-            <li>• Kategoriden hareketi seçin ve detayları inceleyin.</li>
-            <li>• Başlat’a dokunarak süre ve ipuçlarını takip edin.</li>
-            <li>• Bitir ile seansı kaydedip sıradaki harekete geçin.</li>
+            <li>• Hareketi seçip rehberi inceleyin, ROM sınırına sadık kalın.</li>
+            <li>• Başlat ile süre, ipucu ve set hedeflerini takip edin.</li>
+            <li>• Bitir sonrası ağrı/enerji notunu seansınıza ekleyin.</li>
           </ul>
+        </div>
+
+        <div className="grid grid-cols-2 gap-3">
+          <div className="p-3 bg-white rounded-xl border border-gray-100 shadow-sm space-y-1">
+            <p className="text-xs text-gray-500">Son seans</p>
+            <p className="text-sm font-semibold text-gray-900">{formatDate(performance.lastSession, { withTime: true })}</p>
+            <p className="text-[11px] text-gray-500">Ağrı trendi: {performance.painTrend}</p>
+          </div>
+          <div className="p-3 bg-white rounded-xl border border-gray-100 shadow-sm space-y-1">
+            <p className="text-xs text-gray-500">Sıradaki kontrol</p>
+            <p className="text-sm font-semibold text-gray-900">{formatDate(performance.nextSession, { withTime: true })}</p>
+            <p className="text-[11px] text-gray-500">Enerji: {performance.energyTrend}</p>
+          </div>
+          <div className="p-3 bg-white rounded-xl border border-gray-100 shadow-sm space-y-1">
+            <p className="text-xs text-gray-500">ROM hedefi</p>
+            <p className="text-sm font-semibold text-gray-900">{performance.romGoal}</p>
+            <p className="text-[11px] text-gray-500">Toplam seans: {performance.totalSessions}</p>
+          </div>
+          <div className="p-3 bg-white rounded-xl border border-gray-100 shadow-sm space-y-1">
+            <p className="text-xs text-gray-500">Denge hedefi</p>
+            <p className="text-sm font-semibold text-gray-900">{performance.balanceGoal}</p>
+            <p className="text-[11px] text-gray-500">Bugünkü odak: {performance.todayFocus}</p>
+          </div>
         </div>
 
         <div className="space-y-2">
@@ -133,7 +157,7 @@ export default function ExerciseList({ exercises, onSelect }) {
         ))}
       </section>
 
-      <div className="pb-6 pt-2 text-center text-xs text-gray-400">Minimal demo prototip — dikkat dağıtıcı yok</div>
+      <div className="pb-6 pt-2 text-center text-xs text-gray-400">Rehabilitasyon odaklı demo akışı</div>
     </div>
   )
 }
