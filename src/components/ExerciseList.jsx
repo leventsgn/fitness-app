@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from 'react'
+import React, { useState, useMemo, useCallback, useEffect } from 'react'
 import ExerciseCard from './ExerciseCard'
 
 function slugify(text) {
@@ -15,17 +15,19 @@ function groupByCategory(list) {
   return buckets
 }
 
-const DEFAULT_ORDER = ['Aktivasyon', 'Mobilite', 'Güç', 'Denge', 'Diğer']
+const DEFAULT_ORDER = ['Aktivasyon', 'Mobilite', 'Esneme', 'Güç', 'Denge', 'Kardiyo', 'Diğer']
 
 const heroByCategory = {
   Aktivasyon: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1200&q=80',
   Mobilite: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1200&q=80',
+  Esneme: 'https://images.unsplash.com/photo-1552053566-43e76f47fe68?auto=format&fit=crop&w=1200&q=80',
   Güç: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=1200&q=80',
   Denge: 'https://images.unsplash.com/photo-1599058917823-058a4140c274?auto=format&fit=crop&w=1200&q=80',
+  Kardiyo: 'https://images.unsplash.com/photo-1483721310020-03333e577078?auto=format&fit=crop&w=1200&q=80',
   Diğer: 'https://images.unsplash.com/photo-1554344058-8d1d1bc354c5?auto=format&fit=crop&w=1200&q=80'
 }
 
-export default function ExerciseList({ exercises, onSelect }) {
+export default function ExerciseList({ exercises, onSelect, initialCategory }) {
   const [query, setQuery] = useState('')
 
   const filtered = useMemo(() => {
@@ -44,6 +46,12 @@ export default function ExerciseList({ exercises, onSelect }) {
     const el = document.getElementById(`cat-${slugify(cat)}`)
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }, [])
+
+  useEffect(() => {
+    if (!initialCategory) return
+    const t = setTimeout(() => scrollToCategory(initialCategory), 50)
+    return () => clearTimeout(t)
+  }, [initialCategory, scrollToCategory])
 
   return (
     <div className="min-h-screen p-4 max-w-md mx-auto space-y-5">
