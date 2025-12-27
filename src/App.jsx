@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import ExercisePlayer from './components/ExercisePlayer'
 import ExerciseList from './components/ExerciseList'
+import Profile from './components/Profile'
 import { exercises } from './data/exercises'
 import logo from './assets/fitness-logo.svg'
 
 export default function App() {
   const [selected, setSelected] = useState(null)
   const [showSplash, setShowSplash] = useState(true)
+  const [view, setView] = useState('home')
   const user = {
     name: 'Demo Kullanıcı',
     initials: 'DK',
@@ -14,7 +16,50 @@ export default function App() {
     progressWeek: 8,
     progressPercent: 72,
     profileUrl: '/profile',
+    totalSessions: 42,
+    totalMinutes: 980,
+    streak: 7,
+    therapist: 'Uzm. Fzt. Selin A.',
+    nextCheckin: '12 Mart • 14:00',
+    painLevel: 'Düşük',
+    goals: ['Omuz hareket açıklığını 160° üstünde tutmak', 'Haftada 4 seans tamamlama', 'Skapular stabilizasyonu güçlendirmek']
   }
+  const highlightedExercises = useMemo(() => exercises.slice(0, 4), [])
+  const requirementAnalysis = useMemo(
+    () => [
+      {
+        title: 'Kişiselleştirme',
+        status: 'İyi',
+        description: 'Profil ve hedeflere göre egzersiz önerileri sağlanıyor.',
+        action: 'Önerileri ağrı seviyesi bildirimlerine göre otomatik ayarla.'
+      },
+      {
+        title: 'İlerleme & bağlılık',
+        status: 'Eksik',
+        description: 'Streak ve toplam süre gösteriliyor fakat motivasyon uyarıları yok.',
+        action: 'Bildirim veya mini rozetlerle haftalık seans hedefine hatırlatıcı ekle.'
+      },
+      {
+        title: 'Güvenlik',
+        status: 'İyi',
+        description: 'Ağrı seviyesi takibi ve uyarılar belirtilmiş.',
+        action: 'Seans sonunda “ağrı raporla” mini formu ekleyerek güvenliği güçlendir.'
+      },
+      {
+        title: 'Erişilebilirlik',
+        status: 'Geliştir',
+        description: 'Büyük butonlar mevcut ancak yüksek kontrast modu yok.',
+        action: 'Kontrast/düşük ışık teması ve sesli yönergeler için toggle ekle.'
+      },
+      {
+        title: 'Takip & iletişim',
+        status: 'İyi',
+        description: 'Terapist ve kontrol tarihi kullanıcıya gösteriliyor.',
+        action: 'Kontrol tarihine hatırlatıcı planla ve not bırakma alanı ekle.'
+      }
+    ],
+    []
+  )
 
   useEffect(() => {
     if (!showSplash) return
@@ -72,21 +117,33 @@ export default function App() {
           </div>
           <div className="text-right">
             <p className="text-xs text-gray-500">Programınız</p>
-            <a
-              href={user.profileUrl}
-              className="inline-flex items-center text-xs font-semibold text-indigo-600 hover:text-indigo-700"
+            <button
+              type="button"
+              onClick={() => setView('profile')}
+              className="inline-flex items-center text-xs font-semibold text-indigo-600 hover:text-indigo-700 focus:outline-none"
             >
               Profil · Hafta {user.progressWeek} / %{user.progressPercent}
-            </a>
+            </button>
           </div>
         </div>
       </header>
 
       <main>
-        {!selected ? (
-          <ExerciseList exercises={exercises} onSelect={setSelected} />
-        ) : (
+        {view === 'profile' ? (
+          <Profile
+            user={user}
+            exercises={highlightedExercises}
+            requirementAnalysis={requirementAnalysis}
+            onBack={() => setView('home')}
+            onStartExercise={(ex) => {
+              setSelected(ex)
+              setView('home')
+            }}
+          />
+        ) : selected ? (
           <ExercisePlayer exercise={selected} onBack={() => setSelected(null)} />
+        ) : (
+          <ExerciseList exercises={exercises} onSelect={setSelected} />
         )}
       </main>
 
