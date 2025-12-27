@@ -1,6 +1,7 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef, useState, useEffect, useMemo } from 'react'
 import ControlBar from './ControlBar'
 import InfoPanel from './InfoPanel'
+import { parseDurationToSeconds } from '../utils/time'
 
 export default function ExercisePlayer({ exercise, onBack }) {
   const videoRef = useRef(null)
@@ -9,6 +10,7 @@ export default function ExercisePlayer({ exercise, onBack }) {
   const [musicOn, setMusicOn] = useState(false)
   const [started, setStarted] = useState(false)
   const [elapsed, setElapsed] = useState(0)
+  const targetSeconds = useMemo(() => parseDurationToSeconds(exercise.duration), [exercise.duration])
   const isGif = Boolean(exercise.video?.toLowerCase().includes('.gif'))
   const canPlayVideo = !isGif
 
@@ -36,6 +38,13 @@ export default function ExercisePlayer({ exercise, onBack }) {
 
     return () => clearInterval(timer)
   }, [isPlaying, started])
+
+  useEffect(() => {
+    if (!started || !isPlaying || !targetSeconds) return
+    if (elapsed >= targetSeconds) {
+      handleFinish()
+    }
+  }, [elapsed, isPlaying, started, targetSeconds])
 
   useEffect(() => {
     return () => {
