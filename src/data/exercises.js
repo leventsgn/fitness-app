@@ -1,3 +1,15 @@
+const mediaGlute =
+  'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NDAiIGhlaWdodD0iMzYwIiB2aWV3Qm94PSIwIDAgNjQwIDM2MCI+CiAgPHJlY3QgZmlsbD0iI2U4ZjVlOSIgd2lkdGg9IjY0MCIgaGVpZ2h0PSIzNjAiIHJ4PSIyNCIvPgogIDx0ZXh0IHg9IjUwJSIgeT0iNTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSInSW50ZXInLCAnU2Vnb2UgVUknLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjI2IiBmaWxsPSIjMWI1ZTIwIj5HbHV0ZSBTcXVlZXplPC90ZXh0PgogIDx0ZXh0IHg9IjUwJSIgeT0iODYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSInSW50ZXInLCAnU2Vnb2UgVUknLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE2IiBmaWxsPSIjMmU3ZDMyIj5QZWx2aWMgdGlsdCDCtyBpem9tZXRyaWsgYWt0aXZhc3lvbjwvdGV4dD4KICA8cmVjdCB4PSIxMTAiIHk9IjE1MCIgd2lkdGg9IjQyMCIgaGVpZ2h0PSI4MCIgcng9IjE4IiBmaWxsPSIjYzhlNmM5IiBzdHJva2U9IiMyZTdkMzIiIHN0cm9rZS13aWR0aD0iMyIvPgogIDxyZWN0IHg9IjMzMCIgeT0iMTY4IiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjMyIiByeD0iMTIiIGZpbGw9IiM4MWM3ODQiLz4KICA8cmVjdCB4PSIzMzAiIHk9IjIwNiIgd2lkdGg9IjE0MCIgaGVpZ2h0PSIzMiIgcng9IjEyIiBmaWxsPSIjYTVkNmE3Ii8+CiAgPGNpcmNsZSBjeD0iMjAwIiBjeT0iMTkwIiByPSIyNiIgZmlsbD0iIzJlN2QzMiIvPgogIDxwYXRoIGQ9Ik0yMTUgMTkwaDY1IiBzdHJva2U9IiMxYjVlMjAiIHN0cm9rZS13aWR0aD0iNiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTI1NSAxNzhjMjIgLTE4IDU0IC0yMCA4MiAwIiBmaWxsPSJub25lIiBzdHJva2U9IiMxYjVlMjAiIHN0cm9rZS13aWR0aD0iNiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTI1MiAyMDJjMjQgMTYgNTggMTcgODcgMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMWI1ZTIwIiBzdHJva2Utd2lkdGg9IjYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik0yMTUgMTQwbC0xOCAzMGgzNnoiIGZpbGw9IiM2NmJiNmEiLz4KICA8dGV4dCB4PSI1MCUiIHk9IjMxMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IidJbnRlcicsICdTZWdvZSBVSScsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiMxYjVlMjAiPkRpemxlciBiw7xrw7xsw7wgwrcgdG9wdWtsYXIgeWVyZSDCtyBzxLFrYXJrZW4gbmVmZXMgdmVyPC90ZXh0Pgo8L3N2Zz4='
+
+const mediaShoulder =
+  'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NDAiIGhlaWdodD0iMzYwIiB2aWV3Qm94PSIwIDAgNjQwIDM2MCI+CiAgPHJlY3QgZmlsbD0iI2UzZjJmZCIgd2lkdGg9IjY0MCIgaGVpZ2h0PSIzNjAiIHJ4PSIyNCIvPgogIDx0ZXh0IHg9IjUwJSIgeT0iNTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSInSW50ZXInLCAnU2Vnb2UgVUknLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjI2IiBmaWxsPSIjMGQ0N2ExIj5PbXV6IERhaXJlc2k8L3RleHQ+CiAgPHRleHQgeD0iNTAlIiB5PSI4NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IidJbnRlcicsICdTZWdvZSBVSScsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTYiIGZpbGw9IiMxNTY1YzAiPlNrYXB1bGEga29udHJvbMO8IMK3IGhhZmlmIHRlbXBvPC90ZXh0PgogIDxjaXJjbGUgY3g9IjIwMCIgY3k9IjE5MCIgcj0iMzQiIGZpbGw9IiM5MGNhZjkiIHN0cm9rZT0iIzBkNDdhMSIgc3Ryb2tlLXdpZHRoPSI0Ii8+CiAgPGNpcmNsZSBjeD0iNDQwIiBjeT0iMTkwIiByPSIzNCIgZmlsbD0iI2JiZGVmYiIgc3Ryb2tlPSIjMTU2NWMwIiBzdHJva2Utd2lkdGg9IjQiLz4KICA8cGF0aCBkPSJNMjAwIDEzMGMtNDYgMC00NiAxMjAgMCAxMjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzBkNDdhMSIgc3Ryb2tlLXdpZHRoPSI4IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1kYXNoYXJyYXk9IjEyIDEwIi8+CiAgPHBhdGggZD0iTTQ0MCAxMzBjNDYgMCA0NiAxMjAgMCAxMjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzE1NjVjMCIgc3Ryb2tlLXdpZHRoPSI4IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1kYXNoYXJyYXk9IjEyIDEwIi8+CiAgPHBhdGggZD0iTTIyMCAxOTBoMjAwIiBzdHJva2U9IiMwZDQ3YTEiIHN0cm9rZS13aWR0aD0iOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTIwMCAxMjBsLTE2IDI4aDMyeiIgZmlsbD0iIzFlODhlNSIvPgogIDxwYXRoIGQ9Ik00NDAgMjYwbC0xNi0yOGgzMnoiIGZpbGw9IiMxZTg4ZTUiLz4KICA8dGV4dCB4PSI1MCUiIHk9IjMxMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IidJbnRlcicsICdTZWdvZSBVSScsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiMwZDQ3YTEiPktvbGxhciBoYWZpZiBhw6fEsWRhIMK3IGvDvMOnw7xrIGRhaXJlbGVyIMK3IHJhaGF0IG5lZmVzPC90ZXh0Pgo8L3N2Zz4='
+
+const mediaKnee =
+  'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NDAiIGhlaWdodD0iMzYwIiB2aWV3Qm94PSIwIDAgNjQwIDM2MCI+CiAgPHJlY3QgZmlsbD0iI2YxZjhlOSIgd2lkdGg9IjY0MCIgaGVpZ2h0PSIzNjAiIHJ4PSIyNCIvPgogIDx0ZXh0IHg9IjUwJSIgeT0iNTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSInSW50ZXInLCAnU2Vnb2UgVUknLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjI2IiBmaWxsPSIjMmU3ZDMyIj5EaXogRWtzdGFuc2l5b251PC90ZXh0PgogIDx0ZXh0IHg9IjUwJSIgeT0iODYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSInSW50ZXInLCAnU2Vnb2UgVUknLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE2IiBmaWxsPSIjMzg4ZTNjIj5RdWFkcmljZXBzIMK3IGtvbnRyb2zDvCBixLFyYWttYTwvdGV4dD4KICA8cmVjdCB4PSIxNTAiIHk9IjE1MCIgd2lkdGg9IjM0MCIgaGVpZ2h0PSI4MCIgcng9IjIwIiBmaWxsPSIjYzVlMWE1IiBzdHJva2U9IiMyZTdkMzIiIHN0cm9rZS13aWR0aD0iNCIvPgogIDxyZWN0IHg9IjI3MCIgeT0iMTU4IiB3aWR0aD0iMTcwIiBoZWlnaHQ9IjI4IiByeD0iMTIiIGZpbGw9IiNhZWQ1ODEiLz4KICA8cmVjdCB4PSIyNzAiIHk9IjE5NCIgd2lkdGg9IjE3MCIgaGVpZ2h0PSIyOCIgcng9IjEyIiBmaWxsPSIjOWNjYzY1Ii8+CiAgPHBhdGggZD0iTTE5MCAxOTBjMC0zMiA0Ni0zMiA0NiAwIiBmaWxsPSIjNjZiYjZhIiBzdHJva2U9IiMyZTdkMzIiIHN0cm9rZS13aWR0aD0iNCIvPgogIDxwYXRoIGQ9Ik0xOTAgMTkwYzAgMzIgNDYgMzIgNDYgMCIgZmlsbD0iIzY2YmI2YSIgc3Ryb2tlPSIyZTdkMzIiIHN0cm9rZS13aWR0aD0iNCIvPgogIDxwYXRoIGQ9Ik0yMzYgMTkwbDMyLTZ2MTJ6IiBmaWxsPSIjMWI1ZTIwIi8+CiAgPHBhdGggZD0iTTQ1MCAxOTBsLTI2LTEydjI0eiIgZmlsbD0iIzFiNWUyMCIvPgogIDx0ZXh0IHg9IjUwJSIgeT0iMzEwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iJ0ludGVyJywgJ1NlZ29lIFVJJywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzFiNWUyMCI+RGl6IGthcGHEn8SxbuyxIHl1a2FyxLEgw6dlayDCtyAyIHNuIHR1dCDCtyB5YXZhxb8gYsSxcms8L3RleHQ+Cjwvc3ZnPg=='
+
+const mediaSquat =
+  'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NDAiIGhlaWdodD0iMzYwIiB2aWV3Qm94PSIwIDAgNjQwIDM2MCI+CiAgPHJlY3QgZmlsbD0iI2ZmZjNlMCIgd2lkdGg9IjY0MCIgaGVpZ2h0PSIzNjAiIHJ4PSIyNCIvPgogIDx0ZXh0IHg9IjUwJSIgeT0iNTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSInSW50ZXInLCAnU2Vnb2UgVUknLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjI2IiBmaWxsPSIjZTY1MTAwIj5Ww7xjdXQgQcSfxLFybMSxxJ/EsSBTcXVhdDwvdGV4dD4KICA8dGV4dCB4PSI1MCUiIHk9Ijg2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iJ0ludGVyJywgJ1NlZ29lIFVJJywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgZmlsbD0iI2VmNmMwMCI+S2Fsw6dhIGdlcml5ZSDCtyBkaXpsZXIgaGl6YWzEsTwvdGV4dD4KICA8cmVjdCB4PSIxNzAiIHk9IjE3MCIgd2lkdGg9IjMwMCIgaGVpZ2h0PSIxMTAiIHJ4PSIyNiIgZmlsbD0iI2ZmZTBiMiIgc3Ryb2tlPSIjZTY1MTAwIiBzdHJva2Utd2lkdGg9IjQiLz4KICA8cmVjdCB4PSIyMzAiIHk9IjE1MCIgd2lkdGg9IjE4MCIgaGVpZ2h0PSIyNCIgcng9IjEyIiBmaWxsPSIjZmZiNzRkIi8+CiAgPHJlY3QgeD0iMjMwIiB5PSIyMTAiIHdpZHRoPSIxODAiIGhlaWdodD0iMjQiIHJ4PSIxMiIgZmlsbD0iI2ZiOGMwMCIvPgogIDxwYXRoIGQ9Ik0yMTAgMTYwbC0xOCAzMGgzNnoiIGZpbGw9IiNlZjZjMDAiLz4KICA8cGF0aCBkPSJNNDMwIDI2MGwtMTgtMzBoMzZ6IiBmaWxsPSIjZWY2YzAwIi8+CiAgPHBhdGggZD0iTTMyMCAxNDBjLTQwIDAtNzAgNDAtNzAgODBzMzAgODAgNzAgODAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2U2NTEwMCIgc3Ryb2tlLXdpZHRoPSI4IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1kYXNoYXJyYXk9IjEwIDEwIi8+CiAgPHRleHQgeD0iNTAlIiB5PSIzMTAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSInSW50ZXInLCAnU2Vnb2UgVUknLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBmaWxsPSIjZTY1MTAwIj5Ub3B1a2xhcmRhbiBpdCDCtyBnw7bEn8O8cyBhw6fEsWsgwrcga2FyxLFuIGFrdGlmPC90ZXh0Pgo8L3N2Zz4='
+
 export const exercises = [
   {
     id: 'ex-001',
@@ -6,10 +18,10 @@ export const exercises = [
     warnings: 'Ağrı hissederseniz durun ve fizyoterapistinize danışın.',
     duration: '30s',
     reps: '10 tekrar',
-    video: 'https://interactive-examples.mdn.mozilla.net/media/examples/flower.webm',
+    video: mediaGlute,
     audio: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
-    thumbnail: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=400&q=60',
-    thumbnailSmall: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=120&q=40',
+    thumbnail: mediaGlute,
+    thumbnailSmall: mediaGlute,
     tags: ['Aktivasyon', 'Glute güçlendirme'],
     cues: ['Ayak tabanını yere sabitleyin', 'Sıkarken nefes verin, bırakırken alın', 'Bel boşluğunu kapatmadan devam edin'],
     category: 'Aktivasyon'
@@ -21,10 +33,10 @@ export const exercises = [
     warnings: '',
     duration: '45s',
     reps: '3 set',
-    video: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',
+    video: mediaShoulder,
     audio: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
-    thumbnail: 'https://images.unsplash.com/photo-1526403224743-0b3a07c2f1bf?auto=format&fit=crop&w=400&q=60',
-    thumbnailSmall: 'https://images.unsplash.com/photo-1526403224743-0b3a07c2f1bf?auto=format&fit=crop&w=120&q=40',
+    thumbnail: mediaShoulder,
+    thumbnailSmall: mediaShoulder,
     tags: ['Mobilite', 'Omuz stabilizasyonu'],
     cues: ['Kürek kemiklerini sabit tutun', 'Hareketi küçük ve kontrollü tutun', 'Nefesinizi düzenli verin'],
     category: 'Mobilite'
@@ -36,10 +48,10 @@ export const exercises = [
     warnings: 'Diz ağrısı artarsa durun.',
     duration: '20s',
     reps: '12 tekrar',
-    video: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',
+    video: mediaKnee,
     audio: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',
-    thumbnail: 'https://images.unsplash.com/photo-1558611848-73f7eb4001d2?auto=format&fit=crop&w=400&q=60',
-    thumbnailSmall: 'https://images.unsplash.com/photo-1558611848-73f7eb4001d2?auto=format&fit=crop&w=120&q=40',
+    thumbnail: mediaKnee,
+    thumbnailSmall: mediaKnee,
     tags: ['Denge', 'Quadriceps'],
     cues: ['Diz kapağını yukarı çekerek uzatın', 'Kalçayı sabit tutun', 'Sallanmayı önlemek için karşı bacağınızı aktif tutun'],
     category: 'Denge'
@@ -51,10 +63,10 @@ export const exercises = [
     warnings: 'Dizlerinizin içe düşmemesine dikkat edin. Ağrı oluşursa hareketi sonlandırın.',
     duration: '40s',
     reps: '3 set x 10',
-    video: 'https://raw.githubusercontent.com/mxstbr/fitness-assets/main/gifs/squat-orange.gif',
+    video: mediaSquat,
     audio: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3',
-    thumbnail: 'https://raw.githubusercontent.com/mxstbr/fitness-assets/main/gifs/squat-orange.gif',
-    thumbnailSmall: 'https://raw.githubusercontent.com/mxstbr/fitness-assets/main/gifs/squat-orange.gif',
+    thumbnail: mediaSquat,
+    thumbnailSmall: mediaSquat,
     tags: ['Güç', 'Alt vücut'],
     cues: ['Göğsü dik tutun', 'Dizleri ayak parmaklarıyla aynı hizada tutun', 'Topuklardan iterek yükselin'],
     category: 'Güç'

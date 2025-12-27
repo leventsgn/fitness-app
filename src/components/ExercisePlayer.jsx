@@ -9,7 +9,9 @@ export default function ExercisePlayer({ exercise, onBack }) {
   const [musicOn, setMusicOn] = useState(false)
   const [started, setStarted] = useState(false)
   const [elapsed, setElapsed] = useState(0)
-  const isGif = Boolean(exercise.video?.toLowerCase().includes('.gif'))
+  const isGif = Boolean(
+    exercise.video?.toLowerCase().includes('.gif') || exercise.video?.startsWith('data:image')
+  )
   const canPlayVideo = !isGif
 
   function handleBack() {
