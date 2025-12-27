@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  background: #fbfbfd; /* very light */
+  color: #0f172a;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Small helper for big visual area */
+.video-area {
+  height: 68vh; /* target 65-70% */
+}
+
+/* subtle rounded player */
+.player-card {
+  border-radius: 12px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 6px 18px rgba(15,23,42,0.06);
+}
+
+/* large touch-friendly controls */
+.control-button {
+  height: 56px;
+  min-width: 56px;
+  border-radius: 14px;
+}
+
+/* hero banner */
+.hero-img {
+  height: 9rem;
+  border-radius: 12px;
+  object-fit: cover;
+}
