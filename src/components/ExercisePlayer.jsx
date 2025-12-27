@@ -92,9 +92,14 @@ export default function ExercisePlayer({ exercise, onBack }) {
   function toggleMusic() {
     setMusicOn((s) => {
       const next = !s
-      if (audioRef.current) {
-        if (next) audioRef.current.play().catch(() => {})
-        else audioRef.current.pause()
+      const audio = audioRef.current
+      if (audio) {
+        // Only auto-play when the session is running; otherwise keep preference without playing audio
+        if (next && started && isPlaying) {
+          audio.play().catch(() => {})
+        } else if (!next) {
+          audio.pause()
+        }
       }
       return next
     })
