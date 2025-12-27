@@ -30,6 +30,15 @@ export default function ExercisePlayer({ exercise, onBack }) {
   }, [])
 
   useEffect(() => {
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+    }
+  }, [])
+
+  useEffect(() => {
     if (!started || !isPlaying) return
 
     const timer = setInterval(() => {
@@ -92,8 +101,8 @@ export default function ExercisePlayer({ exercise, onBack }) {
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center p-4 max-w-md mx-auto">
-      <div className="w-full player-card overflow-hidden">
+    <div className="h-screen overflow-hidden flex flex-col items-center px-4 pt-4 pb-28 max-w-md mx-auto">
+      <div className="w-full player-card overflow-hidden flex flex-col flex-1 min-h-0">
         <div className="video-area bg-black flex items-center justify-center relative">
           <button
             onClick={handleBack}
@@ -127,7 +136,7 @@ export default function ExercisePlayer({ exercise, onBack }) {
             />
           )}
         </div>
-        <div className="p-5">
+        <div className="p-5 overflow-y-auto">
           <InfoPanel exercise={exercise} started={started} elapsed={elapsed} />
         </div>
       </div>
