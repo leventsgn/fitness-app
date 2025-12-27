@@ -14,7 +14,9 @@ body {
 
 /* Small helper for big visual area */
 .video-area {
-  height: 68vh; /* target 65-70% */
+  flex: 1 1 auto;
+  min-height: 44vh;
+  min-width: 0;
 }
 
 /* subtle rounded player */
