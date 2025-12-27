@@ -75,28 +75,17 @@ export default function App() {
 
   if (showSplash) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-indigo-50 via-white to-white flex items-center justify-center px-6 text-center">
-        <div className="space-y-8 max-w-sm w-full">
-          <div className="h-28 w-28 mx-auto rounded-3xl bg-white shadow-lg shadow-indigo-100 border border-indigo-50 flex items-center justify-center">
-            <img src={logo} alt="FizyoApp" className="h-16 w-16" />
+      <div
+        className="min-h-screen bg-gradient-to-b from-gray-950 via-black to-gray-900 flex items-center justify-center"
+        onClick={handleSkipSplash}
+      >
+        <div className="relative">
+          <div className="absolute inset-0 rounded-full bg-indigo-500/15 blur-3xl" aria-hidden="true" />
+          <div className="relative flex flex-col items-center gap-4">
+            <img src={logo} alt="FizyoApp" className="h-20 w-20 drop-shadow-[0_0_22px_rgba(99,102,241,0.45)]" />
+            <p className="text-indigo-100 font-semibold tracking-wide text-sm uppercase">FizyoApp</p>
           </div>
-          <div className="space-y-3">
-            <p className="text-sm font-semibold text-indigo-600">FizyoApp</p>
-            <h1 className="text-2xl font-bold text-gray-900">Kişiselleştirilmiş egzersizlerinize hazırlanıyoruz</h1>
-            <p className="text-sm text-gray-500">Güvenle ilerlemeniz için programınız yükleniyor…</p>
-          </div>
-          <div className="space-y-3">
-            <div className="w-full h-2 bg-indigo-100 rounded-full overflow-hidden">
-              <div className="h-full w-3/5 bg-indigo-500 animate-pulse" />
-            </div>
-            <button
-              type="button"
-              onClick={handleSkipSplash}
-              className="w-full py-3 px-4 rounded-xl bg-indigo-600 text-white font-semibold shadow-md shadow-indigo-200 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-1"
-            >
-              Başla
-            </button>
-          </div>
+          <span className="sr-only">FizyoApp açılış ekranı</span>
         </div>
       </div>
     )
